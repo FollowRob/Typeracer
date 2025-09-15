@@ -1,10 +1,4 @@
-function setDifficulty(level) {
-    document.getElementById("difficultyDropdownBtn").textContent =
-      level;
-    document.getElementById("difficultyInput").value = level;
-  }
-
-  // Typing test sample texts by difficulty
+// Typing test sample texts by difficulty
 const typingSamples = {
   Easy: [
     "The quick brown fox jumps over the lazy dog.",
@@ -33,6 +27,7 @@ function updateSampleText() {
   const difficulty = document.getElementById('difficultyInput').value;
   const sampleText = getRandomSample(typingSamples[difficulty]);
   document.getElementById('sampleText').textContent = sampleText;
+  highlightTypingAccuracy();
 }
 
 // Called when user selects a difficulty
@@ -41,11 +36,6 @@ function setDifficulty(level) {
   document.getElementById('difficultyInput').value = level;
   updateSampleText();
 }
-
-// Initialize with a random sample on page load
-document.addEventListener('DOMContentLoaded', () => {
-  updateSampleText();
-});
 
 let testStartTime = null;
 let testEndTime = null;
@@ -59,6 +49,7 @@ function startTest() {
   document.getElementById('typingInput').value = '';
   document.getElementById('typingInput').focus();
   document.getElementById('resultTime').textContent = '-';
+  highlightTypingAccuracy();
 }
 
 // Reset the typing test
@@ -70,14 +61,17 @@ function resetTest() {
   document.getElementById('startBtn').disabled = false;
   document.getElementById('stopBtn').disabled = true;
   updateSampleText();
+  highlightTypingAccuracy();
 }
 
-// Attach event listeners after DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Attach all event listeners after DOM is loaded (single listener)
+document.addEventListener('DOMContentLoaded', function() {
+  addHighlightDivIfNeeded();
   updateSampleText();
   document.getElementById('startBtn').addEventListener('click', startTest);
   document.getElementById('stopBtn').addEventListener('click', stopTest);
   document.getElementById('retryBtn').addEventListener('click', resetTest);
+  document.getElementById('typingInput').addEventListener('input', highlightTypingAccuracy);
   // Initial button states
   document.getElementById('startBtn').disabled = false;
   document.getElementById('stopBtn').disabled = true;
