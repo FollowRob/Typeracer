@@ -9,7 +9,7 @@ const typingSamples = {
   Easy: [
     "The quick brown fox jumps over the lazy dog.",
     "Pack my box with five dozen liquor jugs.",
-    "A wizard’s job is to vex chumps quickly in fog."
+    "A wizards job is to vex chumps quickly in fog."
   ],
   Medium: [
     "Sphinx of black quartz, judge my vow and quickly jump.",
@@ -59,16 +59,6 @@ function startTest() {
   document.getElementById('typingInput').value = '';
   document.getElementById('typingInput').focus();
   document.getElementById('resultTime').textContent = '-';
-}
-
-// Stop the typing test and display the time
-function stopTest() {
-  if (testStartTime === null) return;
-  testEndTime = performance.now();
-  const elapsedSeconds = ((testEndTime - testStartTime) / 1000).toFixed(2);
-  document.getElementById('resultTime').textContent = `${elapsedSeconds} s`;
-  document.getElementById('startBtn').disabled = false;
-  document.getElementById('stopBtn').disabled = true;
 }
 
 // Reset the typing test
@@ -130,3 +120,70 @@ function stopTest() {
   document.getElementById('startBtn').disabled = false;
   document.getElementById('stopBtn').disabled = true;
 }
+
+// Add a div for highlighted feedback below the sample text if not present
+function addHighlightDivIfNeeded() {
+  if (!document.getElementById('highlightedSampleText')) {
+    const sampleTextDiv = document.getElementById('sampleText');
+    const highlightDiv = document.createElement('div');
+    highlightDiv.id = 'highlightedSampleText';
+    highlightDiv.style.minHeight = '48px';
+    highlightDiv.style.marginTop = '8px';
+    highlightDiv.style.fontFamily = 'inherit';
+    highlightDiv.style.wordBreak = 'break-word';
+    sampleTextDiv.parentNode.insertBefore(highlightDiv, sampleTextDiv.nextSibling);
+  }
+}
+
+// Highlight correct and incorrect words as the user types
+function highlightTypingAccuracy() {
+  addHighlightDivIfNeeded();
+  const sampleText = document.getElementById('sampleText').textContent;
+  const userInput = document.getElementById('typingInput').value;
+
+  const sampleWords = sampleText.trim().split(/\s+/);
+  const userWords = userInput.trim().split(/\s+/);
+
+  let highlighted = '';
+  for (let i = 0; i < sampleWords.length; i++) {
+    let word = sampleWords[i];
+    if (userWords[i] !== undefined && userWords[i].length > 0) {
+      if (userWords[i] === word) {
+        highlighted += '<span style="color: blue; font-weight: bold;">' + word + '</span>';
+      } else {
+        highlighted += '<span style="color: red; font-weight: bold;">' + word + '</span>';
+      }
+    } else {
+      highlighted += '<span>' + word + '</span>';
+    }
+    if (i < sampleWords.length - 1) highlighted += ' ';
+  }
+  document.getElementById('highlightedSampleText').innerHTML = highlighted;
+}
+
+// Update highlight when sample text changes
+function updateSampleText() {
+  const difficulty = document.getElementById('difficultyInput').value;
+  const sampleText = getRandomSample(typingSamples[difficulty]);
+  document.getElementById('sampleText').textContent = sampleText;
+  highlightTypingAccuracy();
+}
+
+// Reset highlight on retry or new sample
+function resetTest() {
+  testStartTime = null;
+  testEndTime = null;
+  document.getElementById('typingInput').value = '';
+  document.getElementById('resultTime').textContent = '-';
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+  updateSampleText();
+  highlightTypingAccuracy();
+}
+
+// Attach real-time feedback event
+document.addEventListener('DOMContentLoaded', function() {
+  addHighlightDivIfNeeded();
+  document.getElementById('typingInput').addEventListener('input', highlightTypingAccuracy);
+  // ...existing code...
+});
