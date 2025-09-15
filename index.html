@@ -1,19 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
-<!-- font awesome -->
-<script src="https://kit.fontawesome.com/88bfd03b4f.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="assets/css/style.css">
-<title>TypeRacer</title>
-</head>
-<body>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Enter your description here" />
+    <title>TypeRacer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css"
+    />
+    <!-- font awesome -->
+    <script
+      src="https://kit.fontawesome.com/88bfd03b4f.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style></style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-title">TypeRacer</div>
+      <button class="instructions-btn">Instructions</button>
+    </header>
+    <main>
+      <div class="main-grid">
+        <section class="left-col">
+          <!-- Left column content -->
+          <div class="mb-3">
+            <label for="difficultyDropdown" class="form-label fw-bold"
+              >Select Difficulty</label
+            >
+            <div class="input-group mb-4">
+              <button
+                class="btn btn-outline-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="difficultyDropdownBtn"
+              >
+                Easy
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="setDifficulty('Easy'); return false;"
+                    >Easy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="setDifficulty('Medium'); return false;"
+                    >Medium</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="setDifficulty('Hard'); return false;"
+                    >Hard</a
+                  >
+                </li>
+              </ul>
+              <input
+                type="text"
+                class="form-control"
+                id="difficultyInput"
+                value="Easy"
+                aria-label="Text input with dropdown button"
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <div class="fw-bold mb-2">Test your typing speed by typing the text below:</div>
+              <div
+                class="border rounded p-2 bg-light mb-3"
+                id="sampleText"
+                style="min-height: 48px"
+              >
+                The quick brown fox jumps over the lazy dog.
+              </div>
+              <label for="typingInput" class="form-label">Type here:</label>
+              <textarea
+                class="form-control mb-3"
+                id="typingInput"
+                rows="3"
+                placeholder="Click the start button to begin."
+                autocomplete="off"
+              ></textarea>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-success flex-fill"
+                  id="startBtn"
+                  type="button"
+                >
+                  Start
+                </button>
+                <button
+                  class="btn btn-danger flex-fill"
+                  id="stopBtn"
+                  type="button"
+                >
+                  Stop
+                </button>
+                <button
+                  class="btn btn-secondary flex-fill"
+                  id="retryBtn"
+                  type="button"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <aside class="right-col">
+          <!-- Right column content -->
+          <div class="card mb-3">
+            <div class="card-header fw-bold">Results</div>
+            <div class="card-body">
+              <div class="mb-2">
+                <span class="fw-semibold">Level:</span>
+                <span id="resultLevel">-</span>
+              </div>
+              <div class="mb-2">
+                <span class="fw-semibold">Time:</span>
+                <span id="resultTime">-</span>
+              </div>
+              <div>
+                <span class="fw-semibold">WPM:</span>
+                <span id="resultWpm">-</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  </body>
 </html>

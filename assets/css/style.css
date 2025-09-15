@@ -1,0 +1,76 @@
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
+
+
+body {
+    margin: 0;
+    font-family: 'Nunito', Arial, Helvetica, sans-serif;
+    background: #f9f9f9;
+}
+
+/* Apply Alegreya to all headings */
+h1, h2, h3, h4, h5, h6, .header-title, .card-header, .fw-bold, .fw-semibold {
+    font-family: 'Alegreya', serif !important;
+}
+.header {
+    background-color: #ff8400;
+    padding: 24px 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.header-title {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.instructions-btn {
+    background: #fff;
+    color: #ff8400;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    transition: background 0.2s, color 0.2s;
+}
+.instructions-btn:hover {
+    background: #ffe0b2;
+    color: #b35c00;
+}
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+.left-col, .right-col {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 24px;
+    min-height: 200px;
+}
+@media (min-width: 768px) {
+    .main-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+@media (max-width: 600px) {
+    .header-title {
+        font-size: 1.5rem;
+    }
+    .instructions-btn {
+        font-size: 0.95rem;
+        padding: 8px 16px;
+    }
+}
