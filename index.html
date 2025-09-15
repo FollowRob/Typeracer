@@ -21,7 +21,32 @@
   <body>
     <header class="header">
       <div class="header-title">TypeRacer</div>
-      <button class="instructions-btn">Instructions</button>
+  <button class="instructions-btn" data-bs-toggle="modal" data-bs-target="#instructionsModal">Instructions</button>
+    <!-- Instructions Modal -->
+    <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="instructionsModalLabel">How to Use the Typing Speed Test</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ol>
+              <li>Select your desired difficulty level from the dropdown menu.</li>
+              <li>Read the sample text provided.</li>
+              <li>Click in the typing box and begin typing the sample text. The timer will start automatically when you begin typing.</li>
+              <li>As you type, correct words will be highlighted in blue and incorrect words in red.</li>
+              <li>When you finish, press the <strong>Enter</strong> key to stop the timer and see your results.</li>
+              <li>Your time, words per minute (WPM), and chosen difficulty will be displayed in the results area.</li>
+              <li>Click <strong>Retry</strong> to try again with a new sample text.</li>
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </header>
     <main>
       <div class="main-grid">
