@@ -181,3 +181,50 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('typingInput').addEventListener('input', highlightTypingAccuracy);
   // ...existing code...
 });
+
+// Start the typing test when user begins typing
+function handleTypingStart() {
+  if (testStartTime === null && !document.getElementById('startBtn').disabled) {
+    testStartTime = performance.now();
+    testEndTime = null;
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('stopBtn').disabled = false;
+    document.getElementById('resultTime').textContent = '-';
+  }
+  highlightTypingAccuracy();
+}
+
+// Reset the typing test
+function resetTest() {
+  testStartTime = null;
+  testEndTime = null;
+  document.getElementById('typingInput').value = '';
+  document.getElementById('resultTime').textContent = '-';
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+  updateSampleText();
+  highlightTypingAccuracy();
+}
+
+// Attach all event listeners after DOM is loaded (single listener)
+document.addEventListener('DOMContentLoaded', function() {
+  addHighlightDivIfNeeded();
+  updateSampleText();
+  document.getElementById('startBtn').addEventListener('click', function() {
+    document.getElementById('typingInput').value = '';
+    document.getElementById('typingInput').focus();
+    resetTest();
+  });
+  document.getElementById('stopBtn').addEventListener('click', stopTest);
+  document.getElementById('retryBtn').addEventListener('click', resetTest);
+  document.getElementById('typingInput').addEventListener('input', handleTypingStart);
+  document.getElementById('typingInput').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      stopTest();
+    }
+  });
+  // Initial button states
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+});
